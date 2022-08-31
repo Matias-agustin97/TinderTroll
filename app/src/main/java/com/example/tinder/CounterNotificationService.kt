@@ -35,6 +35,29 @@ class CounterNotificationService(private val context: Context) {
         notificationManager.notify(1,notification)
     }
 
+
+    fun carlosxD(){
+        val activityIntent=Intent(context,MainActivity::class.java)
+
+        val activityPendingIntent= PendingIntent.getActivity(context,1,activityIntent,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
+        )
+
+        val TinderIntent= PendingIntent.getBroadcast(context,2,Intent(context,TinderNotificationReciever::class.java),
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0)
+
+        val notification = NotificationCompat.Builder(context, TINDER_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+//            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(R.drawable.dogor))
+            .setContentTitle("Tienes un nuevo match !")
+            .setContentText("Has hecho match con Jose Alberto Fernandez Gutierrez")
+            .setContentIntent(activityPendingIntent)
+            .addAction(R.drawable.ic_launcher_foreground,"Ingresa para conectarte",TinderIntent)
+            .build()
+
+        notificationManager.notify(1,notification)
+    }
+
     companion object{
         const val TINDER_CHANNEL_ID="tinder_channel"
     }

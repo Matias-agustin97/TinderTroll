@@ -15,6 +15,9 @@ class MainActivity : AppCompatActivity() {
             service.showNotification()
         }
 
+        findViewById<Button>(R.id.dogor).setOnClickListener{
+            service.carlosxD()
+        }
 
     }
 }
